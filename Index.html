@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palace Coin - $PALACE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #e2c675;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            position: relative;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #f5d67b, #d4af37, #f0c954, #e2c675);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #e2c675;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .nav-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #e2c675;
+        }
+        
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .waterfall {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/api/placeholder/1000/1000') center/cover;
+            opacity: 0.4;
+            z-index: 1;
+        }
+        
+        .gold-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.5), rgba(0, 0, 0, 0.8));
+            z-index: 2;
+        }
+        
+        .gold-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+        }
+        
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #f5d67b, #d4af37, #f0c954, #e2c675);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #f0e6c8;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #d4af37, #f0c954);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            margin: 1rem;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+        }
+        
+        .social-links {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: #e2c675;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #e2c675;
+        }
+        
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #f5d67b, #d4af37, #f0c954, #e2c675);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(10, 10, 10, 0.9));
+            border: 1px solid #d4af37;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #d4af37;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #e2c675;
+        }
+        
+        .tokenomics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .token-stat {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(10, 10, 10, 0.9));
+            border: 1px solid #d4af37;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+        
+        .token-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #f5d67b, #d4af37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .stat-name {
+            font-size: 1.2rem;
+            color: #e2c675;
+        }
+        
+        .roadmap {
+            position: relative;
+            max-width: 900px;
+            margin: 4rem auto;
+        }
+        
+        .roadmap-line {
+            position: absolute;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, #d4af37, #f0c954);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        
+        .roadmap-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            position: relative;
+            margin-bottom: 4rem;
+            z-index: 2;
+        }
+        
+        .roadmap-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+        
+        .roadmap-content {
+            width: 80%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(10, 10, 10, 0.9));
+            border: 1px solid #d4af37;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .roadmap-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .roadmap-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid #d4af37;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #f5d67b, #d4af37, #f0c954, #e2c675);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: #e2c675;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #e2c675;
+        }
+        
+        .copyright {
+            color: #a89251;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes goldFall {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(1000%);
+                opacity: 1;
+            }
+        }
+        
+        .gold-drop {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, #f5d67b, #d4af37);
+            border-radius: 50%;
+            animation: goldFall 10s linear infinite;
+            box-shadow: 0 0 5px #f0c954;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .roadmap-item, .roadmap-item:nth-child(even) {
+                justify-content: center;
+                padding: 0;
+            }
+            
+            .roadmap-line {
+                left: 0;
+            }
+            
+            .roadmap-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">$PALACE</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#tokenomics">Tokenomics</a>
+            <a href="#roadmap">Roadmap</a>
+        </div>
+    </nav>
+    
+    <section class="hero" id="hero">
+        <div class="waterfall"></div>
+        <div class="gold-overlay"></div>
+        <div class="gold-particles" id="goldParticles"></div>
+        <div class="hero-content">
+            <h1>PALACE COIN</h1>
+            <p>The most luxurious token in the Solana ecosystem. Where every investor is treated like royalty.</p>
+            <p>From the deployer who brought you two groundbreaking projects, comes an even more ambitious venture that's set to eclipse them all.</p>
+            <p>Housecoin was just the beginning. Palace Coin is the evolution. Why settle for a house when you can own a palace? 🔥</p>
+            <div>
+                <a href="#" class="cta-btn">BUY $PALACE</a>
+                <a href="#about" class="cta-btn">LEARN MORE</a>
+            </div>
+            <div class="social-links">
+                <a href="https://x.com/palacecoin_sol" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 3.01006C22.0424 3.68553 20.9821 4.20217 19.86 4.54006C19.2577 3.84757 18.4573 3.35675 17.567 3.13398C16.6767 2.91122 15.7395 2.96725 14.8821 3.29451C14.0247 3.62177 13.2884 4.20446 12.773 4.96377C12.2575 5.72309 11.9877 6.62239 12 7.54006V8.54006C10.2426 8.58562 8.50127 8.19587 6.93101 7.4055C5.36074 6.61513 4.01032 5.44869 3 4.01006C3 4.01006 -1 13.0101 8 17.0101C5.94053 18.408 3.48716 19.109 1 19.0101C10 24.0101 21 19.0101 21 7.51006C20.9991 7.23151 20.9723 6.95365 20.92 6.68006C21.9406 5.67355 22.6608 4.40277 23 3.01006Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Twitter
+                </a>
+                <a href="https://t.me/PalaceCoin" target="_blank">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="about">
+        <div class="section-content">
+            <h2 class="section-title">The Palace Advantage</h2>
+            <p>Palace Coin is not just another meme token. It represents the pinnacle of luxury in the crypto space, bringing together the elegance of royal wealth with the innovative power of Solana's blockchain.</p>
+            <p>Our unique deployer has already demonstrated exceptional talent with two previous high-performing projects. Now, they're bringing that expertise to create something even more magnificent.</p>
+            <p>While Housecoin captured attention, Palace Coin is designed to surpass it in every way. After all, what's grander than upgrading from a house to a palace? Our vision extends beyond mere shelter to create a kingdom of wealth for our holders.</p>
+        </div>
+    </section>
+    
+    <section class="section" id="features">
+        <div class="section-content">
+            <h2 class="section-title">Royal Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">👑</div>
+                    <h3 class="feature-title">Elite Deployer</h3>
+                    <p>Created by the same visionary behind two previously successful projects, bringing experience and proven track record.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏛️</div>
+                    <h3 class="feature-title">Palace Ecosystem</h3>
+                    <p>More than just a token—a comprehensive ecosystem built for sustainable growth and royal returns.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title">Golden Opportunity</h3>
+                    <p>Positioned to outperform Housecoin with strategic tokenomics and premier marketing initiatives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="tokenomics">
+        <div class="section-content">
+            <h2 class="section-title">Tokenomics</h2>
+            <div class="tokenomics">
+                <div class="token-stat">
+                    <div class="stat-value">1,000,000,000</div>
+                    <div class="stat-name">Total Supply</div>
+                </div>
+                <div class="token-stat">
+                    <div class="stat-value">10%</div>
+                    <div class="stat-name">Initial Liquidity</div>
+                </div>
+                <div class="token-stat">
+                    <div class="stat-value">0%</div>
+                    <div class="stat-name">Marketing</div>
+                </div>
+                <div class="token-stat">
+                    <div class="stat-value">0%</div>
+                    <div class="stat-name">Development</div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 3rem;">Our token distribution ensures steady growth while maintaining liquidity for all palace residents.</p>
+        </div>
+    </section>
+    
+    <section class="section" id="roadmap">
+        <div class="section-content">
+            <h2 class="section-title">Royal Roadmap</h2>
+            <div class="roadmap">
+                <div class="roadmap-line"></div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Phase 1</div>
+                        <h3>Palace Foundation</h3>
+                        <ul>
+                            <li>Website Launch</li>
+                            <li>Social Media Establishment</li>
+                            <li>Initial Token Distribution</li>
+                            <li>Community Building</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Phase 2</div>
+                        <h3>Palace Construction</h3>
+                        <ul>
+                            <li>Major Exchange Listings</li>
+                            <li>Strategic Partnerships</li>
+                            <li>Marketing Campaigns</li>
+                            <li>Community Growth Initiatives</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Phase 3</div>
+                        <h3>Palace Expansion</h3>
+                        <ul>
+                            <li>NFT Collection Launch</li>
+                            <li>Utility Development</li>
+                            <li>Ecosystem Integration</li>
+                            <li>Global Marketing Push</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="roadmap-item">
+                    <div class="roadmap-content">
+                        <div class="roadmap-date">Phase 4</div>
+                        <h3>Royal Dominance</h3>
+                        <ul>
+                            <li>Housecoin Market Cap Surpassing</li>
+                            <li>Palace DAO Implementation</li>
+                            <li>Cross-Chain Expansion</li>
+                            <li>Revolutionary Features Launch</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="footer-logo">$PALACE</div>
+        <p>The Gold Standard in Crypto</p>
+        <div class="social-links">
+            <a href="https://x.com/palacecoin_sol" target="_blank">Twitter</a>
+            <a href="https://t.me/PalaceCoin" target="_blank">Telegram</a>
+        </div>
+        <div class="copyright">© 2025 Palace Coin. All rights reserved.</div>
+    </footer>
+    
+    <script>
+        // Gold particles waterfall effect
+        function createGoldParticles() {
+            const container = document.getElementById('goldParticles');
+            const containerWidth = container.offsetWidth;
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('gold-drop');
+                
+                // Random position and size
+                const size = Math.random() * 5 + 2;
+                const posX = Math.random() * containerWidth;
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 7 + 3;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size * 10}px`;
+                particle.style.left = `${posX}px`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Initialize animations
+        window.addEventListener('load', () => {
+            createGoldParticles();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
